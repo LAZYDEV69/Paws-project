@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASPIN Home — Dog Adoption</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,300;1,700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  .big-dog-emoji img {
+  width: 100%;
+  max-width: 220px;   /* control size */
+  height: 220px;
+  object-fit: cover;  /* prevents distortion */
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+.spot-emoji img {
+  width: 100%;
+  max-width: 220px;   /* control size */
+  height: 220px;      /* fixed height */
+  object-fit: cover;  /* prevents stretching */
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+:root {
+  --pink:    #f7c5d0;
+  --pink-d:  #e8a0b4;
+  --mint:    #c5e8d8;
+  --mint-d:  #8ecdb4;
+  --lav:     #d8cff0;
+  --lav-d:   #b0a4d8;
+  --peach:   #fddcc8;
+  --peach-d: #f0b898;
+  --yellow:  #fcefc0;
+  --sky:     #c8e4f4;
+  --sky-d:   #8fc4e0;
+  --cream:   #fdf8f4;
+  --white:   #ffffff;
+  --ink:     #3a2d38;
+  --muted:   #8a7a88;
+  --lighter: #b8aab6;
+  --r:       20px;
+  --r-sm:    12px;
+  --r-lg:    32px;
+  --shadow:  0 8px 40px rgba(100,60,90,.10);
+  --shadow-sm: 0 2px 16px rgba(100,60,90,.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: var(--pink); }
+::-webkit-scrollbar-thumb { background: var(--pink-d); border-radius: 99px; }
+
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 5vw;
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(253,248,244,.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232,160,180,.2);
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -.03em;
+}
+.logo span { color: var(--pink-d); }
+nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+nav a { text-decoration: none; font-size: .85rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+nav a:hover { color: var(--ink); }
+.nav-pill { background: var(--pink); color: var(--ink) !important; padding: .5rem 1.3rem; border-radius: 99px; transition: background .2s, transform .15s !important; }
+.nav-pill:hover { background: var(--pink-d) !important; transform: scale(1.04); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 92vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 3rem;
+  padding: 5rem 5vw 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; width: 600px; height: 600px;
+  top: -150px; right: -100px;
+  background: radial-gradient(circle, var(--lav) 0%, transparent 70%);
+  border-radius: 50%; z-index: 0;
+}
+.hero::after {
+  content: ''; position: absolute; width: 400px; height: 400px;
+  bottom: -100px; left: 10%;
+  background: radial-gradient(circle, var(--mint) 0%, transparent 70%);
+  border-radius: 50%; z-index: 0;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-chip {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--yellow); border: 1px solid #f0d890;
+  color: #7a6820; font-size: .75rem; font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .4rem 1rem; border-radius: 99px; margin-bottom: 1.8rem;
+}
+h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-weight: 700; line-height: 1.08; letter-spacing: -.03em;
+  color: var(--ink); margin-bottom: 1.4rem;
+}
+h1 em { font-style: italic; color: var(--pink-d); }
+.hero-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 460px; margin-bottom: 2.5rem; font-weight: 300; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.btn { display: inline-block; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: .95rem; font-weight: 500; padding: .9rem 2rem; border-radius: 99px; transition: transform .15s, box-shadow .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-pink { background: var(--pink-d); color: var(--ink); box-shadow: 0 4px 20px rgba(232,160,180,.45); }
+.btn-pink:hover { box-shadow: 0 8px 28px rgba(232,160,180,.55); }
+.btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid rgba(58,45,56,.15); }
+.btn-ghost:hover { border-color: var(--pink-d); color: var(--ink); }
+.hero-stats { display: flex; gap: 2.5rem; }
+.stat-val { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.stat-lbl { font-size: .75rem; color: var(--lighter); margin-top: .2rem; font-weight: 400; }
+
+/* hero visual */
+.hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+.big-dog-card {
+  background: var(--white); border-radius: var(--r-lg);
+  padding: 2.5rem; box-shadow: var(--shadow); width: 340px; position: relative; z-index: 2;
+}
+.big-dog-emoji { font-size: 7rem; display: block; text-align: center; margin-bottom: 1rem; line-height: 1; }
+.big-dog-name { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: var(--ink); text-align: center; }
+.big-dog-breed { color: var(--muted); text-align: center; font-size: .85rem; margin-bottom: 1.4rem; }
+.big-dog-tags { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.tag { font-size: .72rem; font-weight: 500; padding: .3rem .8rem; border-radius: 99px; }
+.tag-pink  { background: var(--pink);  color: #7a4060; }
+.tag-mint  { background: var(--mint);  color: #2a6850; }
+.tag-lav   { background: var(--lav);   color: #4a3890; }
+.tag-peach { background: var(--peach); color: #8a4818; }
+.tag-sky   { background: var(--sky);   color: #1a5878; }
+.big-dog-btn {
+  display: block; text-align: center; text-decoration: none;
+  background: var(--pink); color: var(--ink); font-weight: 500; font-size: .9rem;
+  padding: .85rem; border-radius: 99px; transition: background .2s, transform .15s;
+}
+.big-dog-btn:hover { background: var(--pink-d); transform: scale(1.02); }
+.float-badge {
+  position: absolute; background: var(--white);
+  border-radius: 14px; padding: .7rem 1rem;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: .6rem;
+  font-size: .8rem; font-weight: 500; color: var(--ink);
+  white-space: nowrap;
+  animation: float 4s ease-in-out infinite;
+}
+.float-badge:nth-child(1) { top: -20px; right: -30px; animation-delay: -1s; }
+.float-badge:nth-child(3) { bottom: 40px; left: -40px; animation-delay: -2.5s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* ── BREED MARQUEE ── */
+.breeds-bar { background: var(--pink); padding: .9rem 0; overflow: hidden; border-top: 1px solid var(--pink-d); border-bottom: 1px solid var(--pink-d); }
+.breeds-track { display: flex; animation: marquee 22s linear infinite; width: max-content; }
+.breeds-bar:hover .breeds-track { animation-play-state: paused; }
+.breed-item { padding: 0 2rem; font-size: .8rem; font-weight: 500; color: #7a4060; letter-spacing: .05em; display: flex; align-items: center; gap: .5rem; white-space: nowrap; }
+.breed-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink-d); flex-shrink: 0; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SHARED SECTION ── */
+section { padding: 6rem 5vw; }
+.section-chip { display: inline-block; font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: .35rem .9rem; border-radius: 99px; margin-bottom: .9rem; }
+.chip-pink  { background: var(--pink);  color: #7a4060; }
+.chip-mint  { background: var(--mint);  color: #2a6850; }
+.chip-lav   { background: var(--lav);   color: #4a3890; }
+.chip-peach { background: var(--peach); color: #8a4818; }
+h2 { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.15; letter-spacing: -.02em; color: var(--ink); margin-bottom: .9rem; }
+h2 em { font-style: italic; color: var(--lav-d); }
+.section-sub { font-size: .95rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── DOG CARDS ── */
+.dogs-section { background: var(--cream); }
+.dogs-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+
+/* CSS-only tabs */
+.tab-input { display: none; }
+.tab-label { display: inline-block; cursor: pointer; padding: .55rem 1.3rem; border-radius: 99px; font-size: .82rem; font-weight: 500; color: var(--muted); border: 1.5px solid rgba(58,45,56,.1); transition: all .2s; }
+.tab-label:hover { border-color: var(--pink-d); color: var(--ink); }
+#tab-all:checked   ~ .tab-bar label[for="tab-all"],
+#tab-small:checked ~ .tab-bar label[for="tab-small"],
+#tab-med:checked   ~ .tab-bar label[for="tab-med"],
+#tab-big:checked   ~ .tab-bar label[for="tab-big"] { background: var(--pink-d); border-color: var(--pink-d); color: var(--ink); }
+.tab-bar { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.dogs-panels > div { display: none; }
+#tab-all:checked   ~ .dogs-panels > .panel-all   { display: grid; }
+#tab-small:checked ~ .dogs-panels > .panel-small  { display: grid; }
+#tab-med:checked   ~ .dogs-panels > .panel-med    { display: grid; }
+#tab-big:checked   ~ .dogs-panels > .panel-big    { display: grid; }
+.dogs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.6rem; }
+
+.dog-card { background: var(--white); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .3s, box-shadow .3s; position: relative; }
+.dog-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.card-img {
+  height: 200px;
+  position: relative;
+  overflow: hidden; /* ✅ VERY IMPORTANT */
+  border-radius: 20px 20px 0 0; /* optional for clean top corners */
+}.card-age { position: absolute; top: .8rem; left: .8rem; background: rgba(255,255,255,.88); backdrop-filter: blur(4px); font-size: .7rem; font-weight: 500; padding: .28rem .7rem; border-radius: 99px; color: var(--ink); }
+
+/* CSS checkbox heart */
+.heart-wrap { position: absolute; top: .8rem; right: .8rem; }
+.heart-cb { display: none; }
+.heart-icon { width: 34px; height: 34px; background: rgba(255,255,255,.88); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: transform .2s; user-select: none; }
+.heart-icon:hover { transform: scale(1.2); }
+.heart-cb:checked + .heart-icon { background: #ffe0ea; }
+
+.card-body { padding: 1.2rem 1.3rem 1.4rem; }
+.card-name-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: .2rem; }
+.card-name { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+.size-badge { font-size: .68rem; font-weight: 600; padding: .25rem .65rem; border-radius: 99px; letter-spacing: .04em; }
+.sz-s { background: var(--mint);  color: #2a6850; }
+.sz-m { background: var(--sky);   color: #1a5878; }
+.sz-l { background: var(--peach); color: #8a4818; }
+.card-breed { font-size: .82rem; color: var(--muted); margin-bottom: .85rem; }
+.card-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.card-loc { font-size: .75rem; color: var(--lighter); }
+.card-btn { background: var(--lav); color: var(--ink); text-decoration: none; font-size: .8rem; font-weight: 500; padding: .5rem 1.1rem; border-radius: 99px; transition: background .2s, transform .15s; }
+.card-btn:hover { background: var(--lav-d); transform: scale(1.04); }
+
+/* ── SPOTLIGHT ── */
+.spotlight { background: var(--peach); }
+.spotlight-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.spot-label { font-size: .72rem; font-weight: 500; color: var(--peach-d); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .8rem; }
+.spot-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.spot-det-item { background: rgba(255,255,255,.6); border-radius: var(--r-sm); padding: .8rem 1rem; }
+.spot-det-lbl { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: #8a6040; margin-bottom: .2rem; }
+.spot-det-val { font-weight: 500; font-size: .9rem; color: var(--ink); }
+.spot-visual { background: var(--white); border-radius: var(--r-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; box-shadow: var(--shadow); text-align: center; }
+.spot-emoji { font-size: 8rem; display: block; margin-bottom: 1.2rem; line-height: 1; }
+.spot-dog-name { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: var(--ink); }
+.spot-dog-breed { font-size: .9rem; color: var(--muted); }
+
+/* ── PROCESS ── */
+.process-section { background: var(--lav); }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.step-card { background: var(--white); border-radius: var(--r); padding: 2rem 1.8rem; box-shadow: var(--shadow-sm); transition: transform .3s; }
+.step-card:hover { transform: translateY(-4px); }
+.step-num { font-family: 'Fraunces', serif; font-size: 4.5rem; font-weight: 700; line-height: 1; color: var(--lav); margin-bottom: .4rem; -webkit-text-stroke: 2px var(--lav-d); }
+.step-icon { font-size: 2rem; margin-bottom: .7rem; display: block; }
+.step-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: .45rem; }
+.step-card p { font-size: .85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ── QUIZ ── */
+.quiz-section { background: var(--ink); padding: 6rem 5vw; }
+.quiz-wrap { max-width: 620px; margin: 0 auto; }
+.quiz-radio { display: none; }
+.quiz-tabs { display: flex; margin-bottom: 2rem; background: rgba(255,255,255,.07); border-radius: 99px; padding: .3rem; width: max-content; }
+.q-tab-lbl { padding: .55rem 1.4rem; border-radius: 99px; font-size: .8rem; font-weight: 500; cursor: pointer; color: rgba(255,255,255,.45); transition: all .2s; }
+#q1:checked ~ .quiz-tabs label[for="q1"],
+#q2:checked ~ .quiz-tabs label[for="q2"],
+#q3:checked ~ .quiz-tabs label[for="q3"],
+#q4:checked ~ .quiz-tabs label[for="q4"] { background: var(--peach-d); color: var(--ink); }
+.quiz-panel { display: none; }
+#q1:checked ~ .quiz-panels .qp1 { display: block; }
+#q2:checked ~ .quiz-panels .qp2 { display: block; }
+#q3:checked ~ .quiz-panels .qp3 { display: block; }
+#q4:checked ~ .quiz-panels .qp4 { display: block; }
+.quiz-card-inner { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: var(--r); padding: 2rem 2.2rem; }
+.quiz-q { font-family: 'Fraunces', serif; font-size: 1.5rem; color: var(--white); margin-bottom: 1.5rem; font-weight: 700; }
+.quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.quiz-opt-radio { display: none; }
+.quiz-opt-lbl { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.1); border-radius: var(--r-sm); padding: .9rem 1rem; cursor: pointer; color: rgba(255,255,255,.75); font-size: .88rem; display: flex; align-items: center; gap: .6rem; transition: all .2s; }
+.quiz-opt-lbl:hover { border-color: var(--peach-d); background: rgba(240,184,152,.1); color: var(--white); }
+.quiz-opt-radio:checked + .quiz-opt-lbl { border-color: var(--peach-d); background: rgba(240,184,152,.15); color: var(--white); }
+.opt-icon { font-size: 1.3rem; }
+.quiz-next { margin-top: 1.5rem; display: inline-block; text-decoration: none; background: var(--peach-d); color: var(--ink); font-size: .9rem; font-weight: 500; padding: .75rem 1.8rem; border-radius: 99px; transition: background .2s, transform .15s; cursor: pointer; }
+.quiz-next:hover { background: var(--peach); transform: scale(1.04); }
+
+/* ── TESTIMONIALS ── */
+.testi-section { background: var(--mint); }
+.testi-section h2 em { color: var(--ink); }
+.testi-track-wrap { overflow: hidden; position: relative; margin-top: 2.5rem; }
+.testi-track-wrap::before, .testi-track-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none; }
+.testi-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--mint), transparent); }
+.testi-track-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--mint), transparent); }
+.testi-track { display: flex; gap: 1.5rem; animation: marquee 35s linear infinite; width: max-content; }
+.testi-track:hover { animation-play-state: paused; }
+.testi-card { background: var(--white); border-radius: var(--r); padding: 1.6rem; width: 290px; flex-shrink: 0; box-shadow: var(--shadow-sm); }
+.testi-stars { color: var(--peach-d); font-size: .9rem; margin-bottom: .7rem; }
+.testi-text { font-size: .85rem; color: var(--muted); line-height: 1.7; font-style: italic; margin-bottom: 1rem; font-weight: 300; }
+.testi-author { display: flex; align-items: center; gap: .7rem; }
+.testi-av { width: 34px; height: 34px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; background: var(--cream); }
+.testi-name { font-weight: 500; font-size: .82rem; color: var(--ink); }
+.testi-dog { font-size: .72rem; color: var(--lighter); }
+
+/* ── NEWSLETTER ── */
+.nl-section { background: var(--pink); padding: 5rem 5vw; text-align: center; position: relative; overflow: hidden; }
+.nl-section::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(255,255,255,.35) 0%, transparent 65%); border-radius: 50%; }
+.nl-section h2 { position: relative; margin-bottom: .8rem; }
+.nl-section .section-sub { position: relative; margin: 0 auto 2.5rem; max-width: 440px; color: #7a4060; }
+.nl-cb { display: none; }
+.nl-form-wrap { position: relative; }
+.nl-row { display: flex; gap: .7rem; justify-content: center; max-width: 420px; margin: 0 auto; flex-wrap: wrap; }
+.nl-input { flex: 1; min-width: 200px; padding: .85rem 1.3rem; border: none; border-radius: 99px; background: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-size: .9rem; color: var(--ink); outline: none; box-shadow: var(--shadow-sm); }
+.nl-input::placeholder { color: var(--lighter); }
+.nl-label-btn { display: inline-block; background: var(--ink); color: var(--pink); border: none; cursor: pointer; padding: .85rem 1.6rem; border-radius: 99px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: .88rem; font-weight: 500; white-space: nowrap; transition: background .2s, transform .15s; }
+.nl-label-btn:hover { background: #5a3a58; transform: scale(1.04); }
+.nl-success { display: none; text-align: center; font-family: 'Fraunces', serif; font-size: 1.4rem; color: var(--ink); padding: 1rem; }
+.nl-cb:checked ~ .nl-form-wrap { display: none; }
+.nl-cb:checked ~ .nl-success { display: block; }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 3rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+footer .logo { color: var(--pink); }
+footer .logo span { color: var(--pink-d); }
+.footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,.35); text-decoration: none; font-size: .82rem; transition: color .2s; }
+.footer-links a:hover { color: var(--pink); }
+.footer-copy { color: rgba(255,255,255,.2); font-size: .75rem; }
+
+/* ── SCROLL ANIMATIONS ── */
+@supports (animation-timeline: scroll()) {
+  .animate-on-scroll {
+    animation: fadeUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav ul { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 3rem 5vw 4rem; }
+  .hero-visual { display: none; }
+  .spotlight-inner { grid-template-columns: 1fr; }
+  .spot-visual { display: none; }
+  .quiz-opts { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+  h1 { font-size: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ASPIN <span>HOME</span></div>
+  <ul>
+    <li><a href="#dogs">Browse Dogs</a></li>
+  
+    <li><a href="#adopt">How to Adopt</a></li>
+    <li><a href="#newsletter" class="nav-pill">🐾 Get Alerts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-chip">🐶 200+ dogs waiting for you</div>
+    <h1>Give an ASPIN their <em>forever</em> home.</h1>
+    <p class="hero-sub">We connect rescued dogs with warm, loving families across the country. One adoption changes two lives — yours and theirs.</p>
+    <div class="hero-btns">
+      <a class="btn btn-pink" href="#dogs">Meet the Dogs 🐕</a>
+      <a class="btn btn-ghost" href="#quiz">Find My Match</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">4,820</div><div class="stat-lbl">Dogs rehomed</div></div>
+      <div><div class="stat-val">130+</div><div class="stat-lbl">Shelter partners</div></div>
+      <div><div class="stat-val">48</div><div class="stat-lbl">Cities covered</div></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="float-badge" style="background:var(--yellow)">🌟 <span>New arrival today!</span></div>
+    <div class="big-dog-card">
+      <span class="big-dog-emoji"> <img src="61c417a1-aff3-415f-a7db-1cc2b4e6cff7.jpg" alt=""></span>
+      <div class="big-dog-name">Waldo</div>
+      <div class="big-dog-breed">Brown Terrier and Aspin mix  ·  4 months old</div>
+      <div class="big-dog-tags">
+        <span class="tag tag-pink">Playful</span>
+        <span class="tag tag-mint">Kid Friendly</span>
+        <span class="tag tag-lav">Loyal</span>
+      </div>
+      <a class="big-dog-btn" href="#dogs">Adopt Waldo 🐾</a>
+    </div>
+    <div class="float-badge" style="background:var(--mint)">❤️ <span>Just favourited!</span></div>
+  </div>
+</section>
+
+<!-- BREED MARQUEE -->
+<div class="breeds-bar">
+  <div class="breeds-track">
+    <span class="breed-item"><span class="breed-dot"></span>Golden Retriever</span>
+    <span class="breed-item"><span class="breed-dot"></span>ASPIN</span>
+    <span class="breed-item"><span class="breed-dot"></span>Beagle</span>
+    <span class="breed-item"><span class="breed-dot"></span>Poodle Mix</span>
+    <span class="breed-item"><span class="breed-dot"></span>Labrador</span>
+    <span class="breed-item"><span class="breed-dot"></span>Dachshund</span>
+    <span class="breed-item"><span class="breed-dot"></span>Siberian Husky</span>
+    <span class="breed-item"><span class="breed-dot"></span>German Shepherd</span>
+    <span class="breed-item"><span class="breed-dot"></span>Shih Tzu</span>
+    <span class="breed-item"><span class="breed-dot"></span>Cavapoo</span>
+    <span class="breed-item"><span class="breed-dot"></span>Border Collie</span>
+    <span class="breed-item"><span class="breed-dot"></span>Corgi</span>
+    <span class="breed-item"><span class="breed-dot"></span>Maltese</span>
+    <span class="breed-item"><span class="breed-dot"></span>Golden Retriever</span>
+        <span class="breed-item"><span class="breed-dot"></span>ASPIN</span>
+    <span class="breed-item"><span class="breed-dot"></span>Beagle</span>
+    <span class="breed-item"><span class="breed-dot"></span>Poodle Mix</span>
+    <span class="breed-item"><span class="breed-dot"></span>Labrador</span>
+    <span class="breed-item"><span class="breed-dot"></span>Dachshund</span>
+    <span class="breed-item"><span class="breed-dot"></span>Siberian Husky</span>
+    <span class="breed-item"><span class="breed-dot"></span>German Shepherd</span>
+    <span class="breed-item"><span class="breed-dot"></span>Shih Tzu</span>
+    <span class="breed-item"><span class="breed-dot"></span>Cavapoo</span>
+    <span class="breed-item"><span class="breed-dot"></span>Border Collie</span>
+    <span class="breed-item"><span class="breed-dot"></span>Corgi</span>
+    <span class="breed-item"><span class="breed-dot"></span>Maltese</span>
+  </div>
+</div>
+
+<!-- DOGS -->
+<section class="dogs-section" id="dogs">
+  <div class="dogs-header animate-on-scroll">
+    <div>
+      <span class="section-chip chip-pink">Browse</span>
+      <h2>Meet our <em>pups</em></h2>
+    </div>
+  </div>
+
+  <input type="radio" name="sizetab" id="tab-all"   class="tab-input" checked>
+  <input type="radio" name="sizetab" id="tab-small" class="tab-input">
+  <input type="radio" name="sizetab" id="tab-med"   class="tab-input">
+  <input type="radio" name="sizetab" id="tab-big"   class="tab-input">
+
+  <div class="tab-bar">
+    <label for="tab-all"   class="tab-label">All Dogs</label>
+    
+  </div>
+
+  <div class="dogs-panels">
+
+    <!-- ALL -->
+    <div class="panel-all dogs-grid">
+
+      <div class="dog-card">
+        <div class="card-img" style="background:#f7e0c0"><span><img src="61c417a1-aff3-415f-a7db-1cc2b4e6cff7.jpg" alt=""></span><span class="card-age">4 months</span>
+          <div class="heart-wrap"><input type="checkbox" class="heart-cb" id="h1"><label for="h1" class="heart-icon">🤍</label></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name-row"><div class="card-name">Waldo</div><span class="size-badge sz-s">Small</span></div>
+          <div class="card-breed">Brown Terrier and Aspin mix</div>
+          <div class="card-tags"><span class="tag tag-pink">Playful</span><span class="tag tag-mint">Kid Friendly</span></div>
+          <div class="card-footer"><span class="card-loc">📍 Camarin Caloocan City</span><a href="#adopt" class="card-btn">Adopt</a></div>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <div class="card-img" style="background:#d8eaf8"><span><img src="bf8c8569-a9f6-4438-a052-a62596160b75.jpg" alt=""></span><span class="card-age">4 yrs</span>
+          <div class="heart-wrap"><input type="checkbox" class="heart-cb" id="h2"><label for="h2" class="heart-icon">🤍</label></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name-row"><div class="card-name">Winter</div><span class="size-badge sz-m">Medium</span></div>
+          <div class="card-breed">White Aspin</div>
+          <div class="card-tags"><span class="tag tag-mint">Hypoallergenic</span><span class="tag tag-lav">Cuddly</span></div>
+          <div class="card-footer"><span class="card-loc">📍 Taguig</span><a href="#adopt" class="card-btn">Adopt</a></div>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <div class="card-img" style="background:#fde8c8"><span><img src="63a5602d-7b87-47d9-91c2-bc9fd6fc143e.jpg" alt=""></span><span class="card-age">3 yrs</span>
+          <div class="heart-wrap"><input type="checkbox" class="heart-cb" id="h3"><label for="h3" class="heart-icon">🤍</label></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name-row"><div class="card-name">Baldo</div><span class="size-badge sz-l">Large</span></div>
+          <div class="card-breed">German Shepherd and Aspin mix</div>
+          <div class="card-tags"><span class="tag tag-peach">Calm</span><span class="tag tag-pink">Friendly</span></div>
+          <div class="card-footer"><span class="card-loc">📍 Pasay City</span><a href="#adopt" class="card-btn">Adopt</a></div>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <div class="card-img" style="background:#d0e8d8"><span><img src="652705776_1708650426977783_1120945521479805311_n.jpg" alt=""></span><span class="card-age">2 yrs</span>
+          <div class="heart-wrap"><input type="checkbox" class="heart-cb" id="h4"><label for="h4" class="heart-icon">🤍</label></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name-row"><div class="card-name">Mochi</div><span class="size-badge sz-m">Medium</span></div>
+          <div class="card-breed">Tiger Commando</div>
+          <div class="card-tags"><span class="tag tag-mint">Trained</span><span class="tag tag-sky">Energetic</span></div>
+          <div class="card-footer"><span class="card-loc">📍Bagong Silang Phase 3 Caloocan</span><a href="#adopt" class="card-btn">Adopt</a></div>
+        </div>
+      </div>
+
+     
+
+    </div><!-- /panel-all -->
+
+    <!-- SMALL -->
+    <div class="panel-small dogs-grid">
+      <div class="dog-card"><div class="card-img" style="background:#d8eaf8"><span>🐩</span><span class="card-age">1 yr</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Luna</div><span class="size-badge sz-s">Small</span></div><div class="card-breed">Poodle Mix</div><div class="card-tags"><span class="tag tag-mint">Hypoallergenic</span></div><div class="card-footer"><span class="card-loc">📍 Seattle, WA</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#eeddf5"><span>🐾</span><span class="card-age">4 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Mochi</div><span class="size-badge sz-s">Small</span></div><div class="card-breed">Shih Tzu</div><div class="card-tags"><span class="tag tag-lav">Lap Dog</span></div><div class="card-footer"><span class="card-loc">📍 Portland, OR</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#fce8d8"><span>🌭</span><span class="card-age">6 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Penny</div><span class="size-badge sz-s">Small</span></div><div class="card-breed">Dachshund</div><div class="card-tags"><span class="tag tag-peach">Sassy</span></div><div class="card-footer"><span class="card-loc">📍 Miami, FL</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#d8f0e0"><span>🌿</span><span class="card-age">3 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Fern</div><span class="size-badge sz-s">Small</span></div><div class="card-breed">Cavapoo</div><div class="card-tags"><span class="tag tag-mint">Social</span></div><div class="card-footer"><span class="card-loc">📍 Boston, MA</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="panel-med dogs-grid">
+      <div class="dog-card"><div class="card-img" style="background:#fde8c8"><span>🐶</span><span class="card-age">5 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Biscuit</div><span class="size-badge sz-m">Medium</span></div><div class="card-breed">Beagle</div><div class="card-tags"><span class="tag tag-peach">Calm</span><span class="tag tag-pink">Friendly</span></div><div class="card-footer"><span class="card-loc">📍 Nashville, TN</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+    </div>
+
+    <!-- LARGE -->
+    <div class="panel-big dogs-grid">
+      <div class="dog-card"><div class="card-img" style="background:#f7e0c0"><span>🐕</span><span class="card-age">3 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Rusty</div><span class="size-badge sz-l">Large</span></div><div class="card-breed">Golden Retriever</div><div class="card-tags"><span class="tag tag-pink">Playful</span><span class="tag tag-mint">Kid Friendly</span></div><div class="card-footer"><span class="card-loc">📍 Austin, TX</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#d0e8d8"><span>🦮</span><span class="card-age">2 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Coco</div><span class="size-badge sz-l">Large</span></div><div class="card-breed">Labrador Mix</div><div class="card-tags"><span class="tag tag-mint">Trained</span></div><div class="card-footer"><span class="card-loc">📍 Denver, CO</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#c8e8e0"><span>🐕‍🦺</span><span class="card-age">2 yrs</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Zeus</div><span class="size-badge sz-l">Large</span></div><div class="card-breed">German Shepherd</div><div class="card-tags"><span class="tag tag-peach">Protective</span></div><div class="card-footer"><span class="card-loc">📍 Chicago, IL</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+      <div class="dog-card"><div class="card-img" style="background:#d0ddf8"><span>🐺</span><span class="card-age">1 yr</span></div><div class="card-body"><div class="card-name-row"><div class="card-name">Atlas</div><span class="size-badge sz-l">Large</span></div><div class="card-breed">Husky Mix</div><div class="card-tags"><span class="tag tag-sky">Adventurous</span></div><div class="card-footer"><span class="card-loc">📍 Bozeman, MT</span><a href="#adopt" class="card-btn">Adopt</a></div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight animate-on-scroll">
+  <div class="spotlight-inner">
+    <div>
+      <div class="spot-label">Dog of the Week</div>
+      <h2>Say hello to <em>Winter</em></h2>
+      <p class="section-sub" style="margin-bottom:2rem">Winter has piercing ice-blue eyes and boundless energy. He dreams of snowy trails, open fields, and a family that keeps up with his spirit.</p>
+      <div class="spot-details">
+        <div class="spot-det-item"><div class="spot-det-lbl">Age</div><div class="spot-det-val">4 years</div></div>
+        <div class="spot-det-item"><div class="spot-det-lbl">Size</div><div class="spot-det-val">Medium</div></div>
+        <div class="spot-det-item"><div class="spot-det-lbl">Breed</div><div class="spot-det-val">White Aspin</div></div>
+        <div class="spot-det-item"><div class="spot-det-lbl">Location</div><div class="spot-det-val">Taguig</div></div>
+      </div>
+      <a class="btn btn-pink" href="#adopt">Meet Winter 🐺</a>
+    </div>
+    <div class="spot-visual">
+      <span class="spot-emoji"><img src="bf8c8569-a9f6-4438-a052-a62596160b75.jpg" alt=""></span>
+      <div class="spot-dog-name">Winter</div>
+      <div class="spot-dog-breed">White Aspin · 4 years old</div>
+      <div style="display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
+        <span class="tag tag-lav">Hypoallergenic</span>
+        
+        <span class="tag tag-peach">Cuddly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PROCESS -->
+<section class="process-section animate-on-scroll" id="adopt">
+  <span class="section-chip chip-lav">Simple Process</span>
+  <h2>Adoption is <em>easy</em></h2>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01</div><span class="step-icon">🔍</span>
+      <h3>Browse &amp; Match</h3>
+      <p>Filter by size, energy level, and traits. Use the quiz to find your ideal breed in under a minute.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div><span class="step-icon">📋</span>
+      <h3>Apply Online</h3>
+      <p>Submit a short application right on the dog's profile page. No paper, no fuss.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div><span class="step-icon">🤝</span>
+      <h3>Meet &amp; Greet</h3>
+      <p>Schedule a visit with the shelter and spend quality time with your future companion.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div><span class="step-icon">🏠</span>
+      <h3>Welcome Home</h3>
+      <p>Finalise the adoption and bring your dog home. We provide 30-day post-adoption support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section animate-on-scroll">
+  <span class="section-chip chip-mint">Happy Families</span>
+  <h2>Stories that <em>melt</em> hearts</h2>
+  <div class="testi-track-wrap">
+    <div class="testi-track">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"We adopted Biscuit last spring and he's already the heart of our home."</p><div class="testi-author"><span class="testi-av">👩</span><div><div class="testi-name">Maria L.</div><div class="testi-dog">Adopted Biscuit</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The quiz pointed me to a perfect match. Within two weeks Luna was home."</p><div class="testi-author"><span class="testi-av">👨</span><div><div class="testi-name">James K.</div><div class="testi-dog">Adopted Luna</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The team walked us through every step with warmth and patience. 10/10."</p><div class="testi-author"><span class="testi-av">👫</span><div><div class="testi-name">David &amp; Ana T.</div><div class="testi-dog">Adopted Coco</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Fern slotted into our family like she'd always been there. Pure magic."</p><div class="testi-author"><span class="testi-av">👩‍🦱</span><div><div class="testi-name">Priya M.</div><div class="testi-dog">Adopted Fern</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Zeus transformed my mornings. We run 5 km every single day now."</p><div class="testi-author"><span class="testi-av">🧑</span><div><div class="testi-name">Carlos B.</div><div class="testi-dog">Adopted Zeus</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"I was nervous about adopting but Pawfect Home made it simple and joyful."</p><div class="testi-author"><span class="testi-av">👱‍♀️</span><div><div class="testi-name">Hannah W.</div><div class="testi-dog">Adopted Atlas</div></div></div></div>
+      <!-- duplicate for seamless loop -->
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"We adopted Biscuit last spring and he's already the heart of our home."</p><div class="testi-author"><span class="testi-av">👩</span><div><div class="testi-name">Maria L.</div><div class="testi-dog">Adopted Biscuit</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The quiz pointed me to a perfect match. Within two weeks Luna was home."</p><div class="testi-author"><span class="testi-av">👨</span><div><div class="testi-name">James K.</div><div class="testi-dog">Adopted Luna</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The team walked us through every step with warmth and patience. 10/10."</p><div class="testi-author"><span class="testi-av">👫</span><div><div class="testi-name">David &amp; Ana T.</div><div class="testi-dog">Adopted Coco</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Fern slotted into our family like she'd always been there. Pure magic."</p><div class="testi-author"><span class="testi-av">👩‍🦱</span><div><div class="testi-name">Priya M.</div><div class="testi-dog">Adopted Fern</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Zeus transformed my mornings. We run 5 km every single day now."</p><div class="testi-author"><span class="testi-av">🧑</span><div><div class="testi-name">Carlos B.</div><div class="testi-dog">Adopted Zeus</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"I was nervous about adopting but Pawfect Home made it simple and joyful."</p><div class="testi-author"><span class="testi-av">👱‍♀️</span><div><div class="testi-name">Hannah W.</div><div class="testi-dog">Adopted Atlas</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-section" id="newsletter">
+  <h2>New pups, <em style="color:var(--ink)">every</em> week</h2>
+  <p class="section-sub">Be first to know when a new dog needs a home. No spam, pinky promise. 🌸</p>
+  <input type="checkbox" class="nl-cb" id="nl-toggle">
+  <div class="nl-form-wrap">
+    <div class="nl-row">
+      <input class="nl-input" type="email" placeholder="your@email.com">
+      <label for="nl-toggle" class="nl-label-btn">Notify Me 🐾</label>
+    </div>
+  </div>
+  <div class="nl-success">🎉 You're on the list! Talk soon.</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Pawfect <span>Home</span></div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">About</a>
+    <a href="#">Shelters</a>
+    <a href="#">Volunteer</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Pawfect Home · Made with 🩷</div>
+</footer>
+
+</body>
+</html>
